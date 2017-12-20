@@ -1,8 +1,8 @@
-public class point {
+public class Point {
 	private int x, y;	//coords on the cookie grid
 	private int val;	//number of cookies so that 
 	
-	public point(int x, int y, int val) {
+	public Point(int x, int y, int val) {
 		this.x = x;
 		this.y = y;
 		this.val = val;

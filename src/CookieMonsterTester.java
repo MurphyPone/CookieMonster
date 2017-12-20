@@ -1,11 +1,15 @@
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.Stack;
 
 public class CookieMonsterTester {
 
 	public static void main(String[] args) {
-		File file = new File()
+		Stack path = new Stack<Point>();
 		
-		Scanner grid = new Scanner(file)
+		
+		
 		
 		
 		
