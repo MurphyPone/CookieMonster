@@ -17,11 +17,7 @@ public class Grid {
 	
 	
 	
-	private void helper() {
-		while(in.hasNextLine()) {
-			
-		}
-			
-			
+	private void readGrid() {
+		
 	}
 }
