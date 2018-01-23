@@ -40,7 +40,7 @@ public class Grid {
 	 * 			move down
 	 * 		else no valid moves
 	 * 			optimalPath(stack.pop()) 
-	 * 		}
+	 * 		}xx
 	 * 		
 	 * 
 	 */
