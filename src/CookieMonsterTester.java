@@ -6,7 +6,7 @@ import java.util.Stack;
 public class CookieMonsterTester {
 
 	public static void main(String[] args) {
-		Stack path = new Stack<Point>();
+		Grid maze = new Grid("cookies.txt");
 		
 		
 		
