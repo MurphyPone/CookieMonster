@@ -4,13 +4,14 @@ import java.util.Scanner;
 import java.io.FileReader;
 import java.io.IOException;
 
-
 public class Grid {
 	private int[][] cookies;
+	//private int total;
 	
 	//Constructor
 	public Grid(String fileName, int cols, int rows) {
-		cookies = new int[cols+1][rows+1];
+		cookies = new int[cols][rows];
+		//total = 0;
 		Scanner inputFile = null;
 
 		try	{
@@ -29,30 +30,34 @@ public class Grid {
 		inputFile.close();
 	}	
 	
-	
 	//Pathfinding methods
 	public int optimalPath(int col, int row) {
-		if(atOrigin(col, row)) 
+		//System.out.println(col + ", " + row);
+		if(atOrigin(col, row) ) 
 			return cookies[col][row];	//arrived at origin
 		
+		if(canGoLeft(col, row) && canGoUp(col,row)) { //if both valid
+			int left = optimalPath(col-1, row);	//Save left in var
+			int up = optimalPath(row-1,col);	//save right in var
+			
+			if( left > up)	//see which is better (suuuuper recursive)
+				return cookies[col][row] + left;	//Choose the one that has the greater # cookies
+			else 
+				return cookies[col][row] + up;
+		}
 		if(!canGoLeft(col, row) && canGoUp(col, row)) 	//if top is valid, but Left is not
-			return optimalPath(col, row-1);	//go up
+			return cookies[col][row] + optimalPath(col, row-1);	//go up
 		
 		if(canGoLeft(col, row) && !canGoUp(col, row)) 	//if left is valid, but Top is not
-			return optimalPath(col-1, row);	//go left
+			return cookies[col][row] + optimalPath(col-1, row);	//go left
 		 
-		if(canGoLeft(col, row) && canGoUp(col,row))  //if both valid
-			if( optimalPath(col-1, row) > optimalPath(row-1,col) )	//see which is better (suuuuper recursive)
-				return optimalPath(col-1, row);	//Choose the one that has the greater # cookies
-			else 
-				return optimalPath(col, row-1);
+		//if reaches end 
+		return cookies[col][row];
 		
-		//if(!canGoLeft(col, row) && !canGoUp(col, row))	//No valid moves
-			return cookies[col][row];		//return cookies in current cell
-		
-		//TODO fix this return 0;
+		/* if(!canGoLeft(col, row) && !canGoUp(col, row))	//No valid moves
+		/ 	return total + cookies[col][row];		//return cookies in current cell
+		*/
 	}	
-	
 	
 	//Directional Helper Methods
 	
@@ -67,6 +72,18 @@ public class Grid {
 	
 	private boolean atOrigin(int c, int r) {
 		return (c == 0 && r == 0);
+	}
+	
+	public String toString() {
+		String result = "";
+		for(int i = 0; i < cookies.length; i ++) { 
+			for(int j = 0; j < cookies[0].length; j++) {
+				result += cookies[j][i] + " ";
+			}
+			result += "\n";
+		}
+		
+		return result;
 	}
 }
 
